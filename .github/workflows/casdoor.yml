@@ -25,6 +25,8 @@ jobs:
         run: |
           echo "🔎 The name of your "
           pwd
+          ls
+          cd casdoor
           git clone https://github.com/casdoor/casdoor.git
           cd casdoor
           get-current-git-tag=`git describe --tags  --abbrev=0`
