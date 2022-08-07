@@ -29,12 +29,12 @@ jobs:
           cd casdoor
           git clone https://github.com/casdoor/casdoor.git
           cd casdoor
-          get-current-git-tag=`git describe --tags  --abbrev=0`
+          get_current_git_tag=`git describe --tags  --abbrev=0`
           pwd
 
       - name: git docker tag
         run: |
-          get-current-docker-tag=`curl -s  https://registry.hub.docker.com/v1/repositories/fish3/casdoor/tags  |  sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' |  tr '}' '\n' |awk -F: '{print $3}'| sort -t'.' -n -k2 -r |head -1`
+          get_current_docker_tag=`curl -s  https://registry.hub.docker.com/v1/repositories/fish3/casdoor/tags  |  sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' |  tr '}' '\n' |awk -F: '{print $3}'| sort -t'.' -n -k2 -r |head -1`
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -55,4 +55,4 @@ jobs:
           target: STANDARD
           push: true
           platforms: linux/amd64
-          tags: casbin/casdoor:${{steps.get-current-git-tag }},casbin/casdoor:latest
+          tags: casbin/casdoor:${{steps.get_current_git_tag }},casbin/casdoor:latest
