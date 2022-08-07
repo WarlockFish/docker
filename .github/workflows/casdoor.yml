@@ -23,6 +23,7 @@ jobs:
     
       - name: git pull
         run: |
+          echo "🔎 The name of your "
           pwd
           git clone https://github.com/casdoor/casdoor.git
           cd casdoor
