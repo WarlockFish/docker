@@ -1,0 +1,52 @@
+name: Build
+
+on: 
+  push:
+    paths:
+      'casdoor/'
+  workflow_dispatch:
+
+
+jobs:
+
+  release-and-push:
+    name: Release And Push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12
+    
+      - name: git pull
+        run: |
+          pwd
+          git clone https://github.com/casdoor/casdoor.git
+          cd casdoor
+          get-current-git-tag=`git describe --tags  --abbrev=0`
+          pwd
+
+      - name: git docker tag
+        run: |
+          get-current-docker-tag=`curl -s  https://registry.hub.docker.com/v1/repositories/fish3/casdoor/tags  |  sed -e 's/[][]//g' -e 's/"//g' -e 's/ //g' |  tr '}' '\n' |awk -F: '{print $3}'| sort -t'.' -n -k2 -r |head -1`
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v3
+        with:
+          target: STANDARD
+          push: true
+          platforms: linux/amd64
+          tags: casbin/casdoor:${{get-current-git-tag }},casbin/casdoor:latest
