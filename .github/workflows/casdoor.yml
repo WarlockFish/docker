@@ -55,4 +55,4 @@ jobs:
           target: STANDARD
           push: true
           platforms: linux/amd64
-          tags: fish3/casdoor:${{steps.get_current_git_tag }},fish3/casdoor:latest
+          tags: fish3/casdoor:$get_current_git_tag ,fish3/casdoor:latest
