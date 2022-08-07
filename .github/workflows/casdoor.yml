@@ -49,4 +49,4 @@ jobs:
           target: STANDARD
           push: true
           platforms: linux/amd64
-          tags: casbin/casdoor:${{get-current-git-tag }},casbin/casdoor:latest
+          tags: casbin/casdoor:${{steps.get-current-git-tag }},casbin/casdoor:latest
