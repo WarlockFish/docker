@@ -43,6 +43,7 @@ jobs:
           get_current_git_tag=`git describe --tags  --abbrev=0`
           echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
           # find . -maxdepth 3
+          cd ../..
           cp casdoor/build.sh casdoor/casdoor/build.sh
           cp casdoor/Dockerfile casdoor/casdoor/Dockerfile
           # ls
