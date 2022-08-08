@@ -26,10 +26,10 @@ jobs:
         with:
           repository: casdoor/casdoor
           path: casdoor/casdoor
-        run: |
-          get_current_git_tag=`git describe --tags  --abbrev=0`
-          pwd
-          echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
+#         run: |
+#           get_current_git_tag=`git describe --tags  --abbrev=0`
+#           pwd
+#           echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
 
     
 #       - name: Fetch Previous version
@@ -40,11 +40,16 @@ jobs:
         run: |
           echo "🔎 The name of your "
           pwd
+          cd casdoor/casdoor
+          pwd
+          ls -a
+          get_current_git_tag=`git describe --tags  --abbrev=0`
+          echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
           # find . -maxdepth 3
           cp casdoor/build.sh casdoor/casdoor/build.sh
           cp casdoor/Dockerfile casdoor/casdoor/Dockerfile
           # ls
-          # cd casdoor/casdoor
+          cd casdoor/casdoor
           # git clone https://github.com/casdoor/casdoor.git
           # cd casdoor
           # get_current_git_tag=`git describe --tags  --abbrev=0`
