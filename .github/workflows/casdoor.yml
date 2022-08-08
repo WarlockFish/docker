@@ -26,10 +26,15 @@ jobs:
         with:
           repository: casdoor/casdoor
           path: casdoor/casdoor
+        run: |
+          get_current_git_tag=`git describe --tags  --abbrev=0`
+          pwd
+          echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
+
     
-      - name: Fetch Previous version
-        id: get-current-git-tag
-        uses: actions-ecosystem/action-get-latest-tag@v1.6.0
+#       - name: Fetch Previous version
+#         id: get-current-git-tag
+#         uses: actions-ecosystem/action-get-latest-tag@v1.6.0
         
       - name: git pull
         run: |
@@ -70,6 +75,6 @@ jobs:
           context: casdoor/casdoor
           push: false
           platforms: linux/amd64
-          tags: fish3/casdoor:${{ steps.get-current-git-tag.outputs.tag  }},fish3/casdoor:latest
-#          tags: fish3/casdoor:${{ env.get_current_git_tag }} ,fish3/casdoor:latest
+#          tags: fish3/casdoor:${{ steps.get-current-git-tag.outputs.tag  }},fish3/casdoor:latest
+          tags: fish3/casdoor:${{ env.get_current_git_tag }} ,fish3/casdoor:latest
 
