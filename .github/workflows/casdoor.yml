@@ -31,14 +31,16 @@ jobs:
         run: |
           echo "🔎 The name of your "
           pwd
-          find . -maxdepth 3
+          # find . -maxdepth 3
+          cp casdoor/build.sh casdoor/casdoor/build.sh
+          cp casdoor/Dockerfile casdoor/casdoor/Dockerfile
           # ls
-          # cd casdoor
+          cd casdoor/casdoor
           # git clone https://github.com/casdoor/casdoor.git
           # cd casdoor
-          # get_current_git_tag=`git describe --tags  --abbrev=0`
+          get_current_git_tag=`git describe --tags  --abbrev=0`
           # pwd
-          # echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
+          echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
 
       - name: git docker tag
         run: |
@@ -61,6 +63,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           target: STANDARD
-          push: true
+          context: casdoor/casdoor
+          push: false
           platforms: linux/amd64
-          # tags: fish3/casdoor:${{ env.get_current_git_tag }} ,fish3/casdoor:latest
+          tags: fish3/casdoor:${{ env.get_current_git_tag }} ,fish3/casdoor:latest
