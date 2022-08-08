@@ -3,7 +3,7 @@ name: cadoor_build
 on: 
   push:
     paths:
-      'casdoor/'
+      'casdoor/*'
   workflow_dispatch:
 
 
