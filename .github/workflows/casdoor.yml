@@ -18,22 +18,17 @@ jobs:
         with:
           node-version: 12
       
-      - name: Check out repository code
+      - name: Checkout my code repo
         uses: actions/checkout@v3
     
-      - name: Checkout tools repo
+      - name: Checkout casdoor repo
         uses: actions/checkout@v3
         with:
           repository: casdoor/casdoor
           path: casdoor/casdoor
           fetch-depth: 0
-
-    
-#       - name: Fetch Previous version
-#         id: get-current-git-tag
-#         uses: actions-ecosystem/action-get-latest-tag@v1.6.0
         
-      - name: git pull
+      - name: get casdoor lasted  tag
         run: |
           echo "🔎 The name of your "
           pwd
