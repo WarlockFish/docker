@@ -26,10 +26,7 @@ jobs:
         with:
           repository: casdoor/casdoor
           path: casdoor/casdoor
-#         run: |
-#           get_current_git_tag=`git describe --tags  --abbrev=0`
-#           pwd
-#           echo "get_current_git_tag=$get_current_git_tag" >> $GITHUB_ENV
+          fetch-depth: 0
 
     
 #       - name: Fetch Previous version
