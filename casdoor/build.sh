@@ -9,6 +9,6 @@ then
 else
     echo "Google is blocked, Go proxy is enabled: GOPROXY=https://goproxy.cn,direct"
     GOOS=linux GOPROXY=https://goproxy.cn,direct go mod tidy
-    #GOOS=linux GOPROXY=https://goproxy.cn,direct go build -ldflags="-linkmode external -extldflags '-static' -w -s" -o server .
-    CGO_ENABLED=1 GOOS=linux GOPROXY=https://goproxy.cn,direct go build -ldflags="-linkmode internal -extldflags '-static' -w -s" -o server .
+    GOOS=linux GOPROXY=https://goproxy.cn,direct go build -ldflags="-linkmode external -extldflags '-static' -w -s" -o server .
+    #GO_ENABLED=1 GOOS=linux GOPROXY=https://goproxy.cn,direct go build -ldflags="-linkmode internal -extldflags '-static' -w -s" -o server .
 fi
