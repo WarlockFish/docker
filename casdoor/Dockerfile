@@ -2,7 +2,9 @@ FROM node:16.13.0 AS FRONT
 WORKDIR /web
 COPY ./web .
 # RUN yarn config set registry https://registry.npmmirror.com
-RUN yarn install --network-timeout 200000 
+RUN  yarn config set registry "http://registry.npmjs.org"
+RUN npm config set registry "http://registry.npmjs.org"
+RUN yarn install --frozen-lockfile --network-timeout 200000  --check-files 
 RUN yarn run build
 
 
