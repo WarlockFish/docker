@@ -2,25 +2,25 @@ FROM node:16.13.0 AS FRONT
 WORKDIR /web
 COPY ./web .
 # RUN yarn config set registry https://registry.npmmirror.com
-RUN  yarn config set registry "http://registry.npmjs.org"
-RUN npm config set registry "http://registry.npmjs.org"
-RUN yarn install --frozen-lockfile --network-timeout 200000  --check-files 
-RUN yarn run build
+RUN  yarn config set registry "http://registry.npmjs.org" \
+&& npm config set registry "http://registry.npmjs.org" \
+&& yarn install --frozen-lockfile --network-timeout 200000  --check-files  \
+&& yarn run build
 
 
 FROM golang:1.17.5 AS BACK
 WORKDIR /go/src/casdoor
 COPY . .
-RUN sed -i '/import/,/)/ s/^[[:space:]]*\/\///g' object/adapter.go
-RUN ./build.sh
+RUN sed -i '/import/,/)/ s/^[[:space:]]*\/\///g' object/adapter.go \
+&& ./build.sh
 
 
 FROM alpine:latest AS STANDARD
 LABEL MAINTAINER="https://casdoor.org/"
 
-RUN sed -i 's/https/http/' /etc/apk/repositories
-RUN apk add curl
-RUN apk add ca-certificates && update-ca-certificates
+RUN sed -i 's/https/http/' /etc/apk/repositories \
+&& apk add curl \
+&& apk add ca-certificates && update-ca-certificates
 
 WORKDIR /
 COPY --from=BACK /go/src/casdoor/server ./server
