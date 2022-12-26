@@ -72,7 +72,7 @@ jobs:
           target: STANDARD
           context: casdoor/casdoor
           push: true
-          platforms: linux/arm64
+          platforms: linux/arm64,linux/amd64
 #          tags: fish3/casdoor:${{ steps.get-current-git-tag.outputs.tag  }},fish3/casdoor:latest
           tags: fish3/casdoor:${{ env.get_current_git_tag }} ,fish3/casdoor:latest
 
